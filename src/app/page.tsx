@@ -1,18 +1,17 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-const SERIF = "'Playfair Display', Georgia, serif";
-const SANS = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
+const HEADING = "'Fraunces', Georgia, serif";
 
 const CATEGORIES = [
-  { id: "housing", icon: "🏠", label: "Housing & Utilities", color: "#E06B4B", bg: "#FEF2EE" },
-  { id: "health", icon: "🩺", label: "Healthcare", color: "#2D9B8A", bg: "#EEF8F6" },
-  { id: "food", icon: "🛒", label: "Groceries & Food", color: "#C49A2A", bg: "#FBF6EA" },
-  { id: "transit", icon: "🚌", label: "Getting Around", color: "#4A72B8", bg: "#EEF2FA" },
-  { id: "finance", icon: "💳", label: "Banking & Taxes", color: "#7C5EAA", bg: "#F4F0FA" },
-  { id: "social", icon: "👋", label: "Community & Social", color: "#C4527A", bg: "#FAEEF3" },
-  { id: "legal", icon: "📋", label: "Legal & Documents", color: "#5C8A4E", bg: "#EFF5ED" },
-  { id: "work", icon: "💼", label: "Career & Work", color: "#B8863A", bg: "#FAF4EA" },
+  { id: "housing", icon: "🏠", label: "Housing & Utilities", color: "#ef4444" },
+  { id: "health", icon: "🩺", label: "Healthcare", color: "#14b8a6" },
+  { id: "food", icon: "🛒", label: "Groceries & Food", color: "#f59e0b" },
+  { id: "transit", icon: "🚌", label: "Getting Around", color: "#3b82f6" },
+  { id: "finance", icon: "💳", label: "Banking & Taxes", color: "#8b5cf6" },
+  { id: "social", icon: "👋", label: "Community & Social", color: "#ec4899" },
+  { id: "legal", icon: "📋", label: "Legal & Documents", color: "#22c55e" },
+  { id: "work", icon: "💼", label: "Career & Work", color: "#f97316" },
 ];
 
 type Task = { id: string; title: string; done: boolean; priority: string; tip: string; day: number };
@@ -70,10 +69,10 @@ const SAMPLE_TASKS: TaskMap = {
 };
 
 const PRIORITIES: Record<string, { label: string; color: string; bg: string; weight: number }> = {
-  urgent: { label: "Urgent", color: "#D93025", bg: "#FDECEA", weight: 0 },
-  high: { label: "High", color: "#E07830", bg: "#FEF3EA", weight: 1 },
-  medium: { label: "Medium", color: "#B8942A", bg: "#FBF6EA", weight: 2 },
-  low: { label: "Low", color: "#5A8A4E", bg: "#EFF5ED", weight: 3 },
+  urgent: { label: "Urgent", color: "#dc2626", bg: "#fef2f2", weight: 0 },
+  high: { label: "High", color: "#ea580c", bg: "#fff7ed", weight: 1 },
+  medium: { label: "Medium", color: "#ca8a04", bg: "#fefce8", weight: 2 },
+  low: { label: "Low", color: "#16a34a", bg: "#f0fdf4", weight: 3 },
 };
 
 let _id = 100;
@@ -171,70 +170,51 @@ export default function Home() {
 
   // ───── LANDING ─────
   if (screen === "landing") return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden p-6"
-      style={{ background: "linear-gradient(165deg, #0F0F0E 0%, #1A1916 35%, #151D1A 65%, #111110 100%)" }}>
-      {/* Ambient glow effects */}
-      <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 600px 400px at 30% 20%, rgba(212,162,57,0.07) 0%, transparent 70%), radial-gradient(ellipse 500px 350px at 75% 75%, rgba(45,155,138,0.05) 0%, transparent 70%)"
-      }} />
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
-        backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-        backgroundSize: "60px 60px"
-      }} />
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{ background: "#FAFAF8" }}>
+      {/* Top gradient accent */}
+      <div className="absolute top-0 left-0 right-0 h-[500px] pointer-events-none"
+        style={{ background: "linear-gradient(180deg, #eef2ff 0%, transparent 100%)" }} />
+      <div className="absolute top-[-200px] right-[-100px] w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(99,102,241,0.08), transparent 70%)" }} />
+      <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(244,114,182,0.06), transparent 70%)" }} />
 
-      <div className="relative z-10 text-center max-w-[560px]" style={{ animation: "fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1)" }}>
-        {/* Logo mark */}
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6" style={{
-          background: "linear-gradient(135deg, rgba(212,162,57,0.15), rgba(212,162,57,0.05))",
-          border: "1px solid rgba(212,162,57,0.2)",
-          animation: "float 4s ease-in-out infinite"
-        }}>
-          <span className="text-4xl font-bold" style={{ fontFamily: SERIF, color: "#D4A239", letterSpacing: "-0.02em" }}>90</span>
+      <div className="relative z-10 text-center px-6 max-w-lg" style={{ animation: "fadeUp 0.7s ease" }}>
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-sm font-medium"
+          style={{ background: "#eef2ff", color: "#6366f1" }}>
+          <span>✨</span> Your personal relocation assistant
         </div>
 
-        <h1 className="text-5xl mb-4 tracking-tight" style={{ fontFamily: SERIF, color: "#F5F3EE", fontWeight: 500, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-          First 90 Days
+        <h1 className="text-6xl font-semibold mb-5 leading-[1.1] tracking-tight"
+          style={{ fontFamily: HEADING, color: "#111" }}>
+          First <span style={{ color: "#6366f1" }}>90</span> Days
         </h1>
-        <p className="text-lg mb-10 mx-auto max-w-[420px] leading-relaxed" style={{ color: "rgba(245,243,238,0.55)", fontFamily: SANS }}>
-          Your personal playbook for settling into a new place — organized, actionable, and tailored to you.
+
+        <p className="text-lg mb-10 mx-auto max-w-md leading-relaxed" style={{ color: "#6b7280" }}>
+          A personalized playbook for settling into your new city. Organized tasks, local tips, and progress tracking — all in one place.
         </p>
 
-        <div className="flex gap-3 justify-center flex-wrap mb-10">
-          {[
-            { icon: "✓", text: "Personalized checklist" },
-            { icon: "◎", text: "Local recommendations" },
-            { icon: "♡", text: "Community tips" },
-          ].map((f, i) => (
-            <span key={i} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[13px] font-medium"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                color: "rgba(245,243,238,0.7)",
-                backdropFilter: "blur(8px)"
-              }}>
-              <span style={{ color: "#D4A239", fontSize: "11px" }}>{f.icon}</span>
-              {f.text}
+        <div className="flex gap-6 justify-center mb-10 text-sm" style={{ color: "#6b7280" }}>
+          {["Personalized tasks", "Local tips", "Track progress"].map((f, i) => (
+            <span key={i} className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white" style={{ background: "#6366f1" }}>✓</span>
+              {f}
             </span>
           ))}
         </div>
 
         <button onClick={() => setScreen("onboarding")}
-          className="px-10 py-4 rounded-2xl text-[15px] font-semibold cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+          className="px-8 py-4 rounded-xl text-base font-semibold cursor-pointer transition-all duration-200"
           style={{
-            background: "linear-gradient(135deg, #D4A239 0%, #C49428 100%)",
-            color: "#111110",
-            border: "none",
-            boxShadow: "0 4px 16px rgba(212,162,57,0.25), 0 1px 3px rgba(212,162,57,0.3)",
-            fontFamily: SANS,
-            letterSpacing: "-0.01em"
+            background: "#6366f1", color: "#fff", border: "none",
+            boxShadow: "0 4px 14px rgba(99,102,241,0.35)"
           }}>
-          Get Started
-          <span className="ml-2 inline-block transition-transform" style={{ display: "inline-block" }}>→</span>
+          Get Started →
         </button>
 
-        <p className="mt-6 text-[13px] tracking-wide" style={{ color: "rgba(245,243,238,0.25)", fontFamily: SANS }}>
-          Free forever · No account needed · Data stays on your device
+        <p className="mt-5 text-sm" style={{ color: "#9ca3af" }}>
+          Free · No account needed · Data stays on your device
         </p>
       </div>
     </div>
@@ -264,107 +244,79 @@ export default function Home() {
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-6"
-        style={{ background: "linear-gradient(165deg, #0F0F0E 0%, #1A1916 50%, #111110 100%)" }}>
-
-        {/* Step progress bar */}
-        <div className="flex items-center gap-1.5 mb-10">
+        style={{ background: "#FAFAF8" }}>
+        {/* Progress dots */}
+        <div className="flex items-center gap-2 mb-8">
           {steps.map((_, i) => (
-            <div key={i} className="relative overflow-hidden rounded-full transition-all duration-500"
+            <div key={i} className="rounded-full transition-all duration-300"
               style={{
-                width: i <= step ? 28 : 8,
-                height: 8,
-                background: i <= step ? "linear-gradient(90deg, #D4A239, #C49428)" : "rgba(255,255,255,0.1)",
+                width: i === step ? 32 : 10, height: 10,
+                background: i <= step ? "#6366f1" : "#e5e7eb",
               }} />
           ))}
         </div>
 
-        <div className="rounded-3xl p-10 w-full max-w-[500px]"
-          style={{
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(255,255,255,0.07)",
-            backdropFilter: "blur(20px)",
-            animation: "scaleIn 0.4s cubic-bezier(0.22, 1, 0.36, 1)"
-          }}>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-4"
-            style={{ color: "#D4A239", fontFamily: SANS }}>Step {step + 1} of {steps.length}</p>
-          <h2 className="text-[28px] mb-7 leading-tight" style={{ fontFamily: SERIF, color: "#F5F3EE", fontWeight: 500, letterSpacing: "-0.01em" }}>{cur.q}</h2>
+        <div className="bg-white rounded-2xl p-8 w-full max-w-md"
+          style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04)", animation: "fadeUp 0.4s ease" }}>
+          <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "#6366f1" }}>
+            Step {step + 1} of {steps.length}
+          </p>
+          <h2 className="text-2xl font-semibold mb-6" style={{ fontFamily: HEADING, color: "#111" }}>{cur.q}</h2>
 
           {cur.type === "text" && (
-            <input className="w-full px-5 py-4 rounded-2xl text-[15px] transition-all duration-200"
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#F5F3EE",
-                fontFamily: SANS
-              }}
+            <input className="w-full px-4 py-3 rounded-lg text-base"
+              style={{ background: "#f9fafb", border: "1.5px solid #e5e7eb", color: "#111" }}
               placeholder={cur.placeholder} value={profile[cur.field as keyof Profile] as string || ""}
               onChange={e => setProfile({ ...profile, [cur.field]: e.target.value })}
               onKeyDown={e => e.key === "Enter" && canNext && goNext()} autoFocus />
           )}
           {cur.type === "date" && (
-            <input type="date" className="w-full px-5 py-4 rounded-2xl text-[15px] transition-all duration-200"
-              style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#F5F3EE",
-                fontFamily: SANS,
-                colorScheme: "dark"
-              }}
+            <input type="date" className="w-full px-4 py-3 rounded-lg text-base"
+              style={{ background: "#f9fafb", border: "1.5px solid #e5e7eb", color: "#111" }}
               value={moveDate} onChange={e => setMoveDate(e.target.value)} autoFocus />
           )}
           {cur.type === "select" && (
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-2">
               {(cur.options as string[]).map(o => (
-                <button key={o} className="px-5 py-3 rounded-2xl text-[14px] cursor-pointer transition-all duration-200"
+                <button key={o} className="px-4 py-2.5 rounded-lg text-sm cursor-pointer transition-all duration-150"
                   style={{
-                    background: profile.background === o ? "rgba(212,162,57,0.15)" : "rgba(255,255,255,0.04)",
-                    border: `1.5px solid ${profile.background === o ? "rgba(212,162,57,0.5)" : "rgba(255,255,255,0.08)"}`,
-                    color: profile.background === o ? "#D4A239" : "rgba(245,243,238,0.7)",
-                    fontFamily: SANS, fontWeight: profile.background === o ? 600 : 400
+                    background: profile.background === o ? "#eef2ff" : "#f9fafb",
+                    border: `1.5px solid ${profile.background === o ? "#6366f1" : "#e5e7eb"}`,
+                    color: profile.background === o ? "#6366f1" : "#374151",
+                    fontWeight: profile.background === o ? 600 : 400
                   }}
                   onClick={() => setProfile({ ...profile, background: o })}>{o}</button>
               ))}
             </div>
           )}
           {cur.type === "multi" && (
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-2">
               {(cur.options as { id: string; label: string }[]).map(o => {
                 const sel = profile.priorities.includes(o.id);
-                return <button key={o.id} className="px-5 py-3 rounded-2xl text-[14px] cursor-pointer transition-all duration-200"
+                return <button key={o.id} className="px-4 py-2.5 rounded-lg text-sm cursor-pointer transition-all duration-150"
                   style={{
-                    background: sel ? "rgba(212,162,57,0.15)" : "rgba(255,255,255,0.04)",
-                    border: `1.5px solid ${sel ? "rgba(212,162,57,0.5)" : "rgba(255,255,255,0.08)"}`,
-                    color: sel ? "#D4A239" : "rgba(245,243,238,0.7)",
-                    fontFamily: SANS, fontWeight: sel ? 600 : 400
+                    background: sel ? "#eef2ff" : "#f9fafb",
+                    border: `1.5px solid ${sel ? "#6366f1" : "#e5e7eb"}`,
+                    color: sel ? "#6366f1" : "#374151",
+                    fontWeight: sel ? 600 : 400
                   }}
                   onClick={() => setProfile({ ...profile, priorities: sel ? profile.priorities.filter(p => p !== o.id) : [...profile.priorities, o.id] })}>{o.label}</button>;
               })}
             </div>
           )}
 
-          <div className="flex gap-3 mt-8">
-            {step > 0 && <button className="px-6 py-3.5 rounded-2xl text-[14px] font-medium cursor-pointer transition-all duration-200"
+          <div className="flex gap-3 mt-7">
+            {step > 0 && <button className="px-5 py-3 rounded-lg text-sm font-medium cursor-pointer"
+              style={{ background: "#f9fafb", border: "1.5px solid #e5e7eb", color: "#374151" }}
+              onClick={() => setStep(step - 1)}>← Back</button>}
+            <button className="flex-1 py-3 rounded-lg text-sm font-semibold cursor-pointer transition-all duration-200"
               style={{
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.12)",
-                color: "rgba(245,243,238,0.7)",
-                fontFamily: SANS
-              }}
-              onClick={() => setStep(step - 1)}>
-              <span className="mr-1">←</span> Back
-            </button>}
-            <button className="flex-1 px-9 py-3.5 rounded-2xl text-[15px] font-semibold cursor-pointer transition-all duration-300"
-              style={{
-                background: "linear-gradient(135deg, #D4A239, #C49428)",
-                color: "#111110",
-                border: "none",
-                opacity: canNext ? 1 : 0.3,
-                pointerEvents: canNext ? "auto" : "none",
-                fontFamily: SANS,
-                boxShadow: canNext ? "0 4px 16px rgba(212,162,57,0.2)" : "none"
+                background: "#6366f1", color: "#fff", border: "none",
+                opacity: canNext ? 1 : 0.4, pointerEvents: canNext ? "auto" : "none",
+                boxShadow: canNext ? "0 2px 8px rgba(99,102,241,0.3)" : "none"
               }}
               onClick={goNext}>
-              {step === steps.length - 1 ? "Build My Playbook" : "Continue →"}
+              {step === steps.length - 1 ? "Build My Playbook ✨" : "Continue →"}
             </button>
           </div>
         </div>
@@ -380,204 +332,171 @@ export default function Home() {
   const activeCat = CATEGORIES.find(c => c.id === activeCategory);
 
   return (
-    <div className="min-h-screen relative" style={{ background: "#FAFAF7", fontFamily: SANS }}>
+    <div className="min-h-screen" style={{ background: "#FAFAF8" }}>
       {/* Confetti */}
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50">
-          {Array.from({ length: 16 }).map((_, i) => (
-            <span key={i} className="absolute w-2.5 h-2.5 rounded-sm"
+          {Array.from({ length: 14 }).map((_, i) => (
+            <span key={i} className="absolute w-2 h-2 rounded-sm"
               style={{ left: `${8 + Math.random() * 84}%`, top: -10,
-                background: ["#D4A239", "#E06B4B", "#2D9B8A", "#4A72B8", "#C4527A"][i % 5],
-                animation: `confettiFall 1.8s ease forwards`, animationDelay: `${Math.random() * 0.5}s` }} />
+                background: ["#6366f1", "#ef4444", "#14b8a6", "#f59e0b", "#ec4899"][i % 5],
+                animation: `confettiFall 1.6s ease forwards`, animationDelay: `${Math.random() * 0.5}s` }} />
           ))}
         </div>
       )}
 
       {/* Header */}
-      <header className="flex items-center justify-between px-6 py-4" style={{
-        background: "linear-gradient(135deg, #111110 0%, #1A1916 100%)",
-        color: "#F5F3EE",
-        borderBottom: "1px solid rgba(255,255,255,0.06)"
-      }}>
-        <div className="flex items-center gap-4">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold"
-            style={{ fontFamily: SERIF, color: "#D4A239", background: "rgba(212,162,57,0.1)", border: "1px solid rgba(212,162,57,0.15)" }}>90</div>
+      <header className="bg-white flex items-center justify-between px-6 py-4"
+        style={{ borderBottom: "1px solid #f0f0ee" }}>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white"
+            style={{ background: "#6366f1" }}>90</div>
           <div>
-            <h1 className="text-lg font-medium tracking-tight" style={{ fontFamily: SERIF, fontWeight: 500, letterSpacing: "-0.01em" }}>
-              {profile.name ? `${profile.name}\u2019s Playbook` : "My Playbook"}
+            <h1 className="text-base font-semibold" style={{ color: "#111" }}>
+              {profile.name ? `${profile.name}'s Playbook` : "My Playbook"}
             </h1>
-            <p className="text-[12px] mt-0.5 font-medium" style={{ color: "rgba(245,243,238,0.4)", fontFamily: SANS, letterSpacing: "0.02em" }}>
-              {profile.to || "New City"} {daysLeft !== null ? ` \u00b7 Day ${daysSinceMove} of 90 \u00b7 ${daysLeft} days left` : ""}
+            <p className="text-xs" style={{ color: "#9ca3af" }}>
+              {profile.to || "New City"}{daysLeft !== null ? ` · Day ${daysSinceMove} · ${daysLeft} days left` : ""}
             </p>
           </div>
         </div>
         <button onClick={resetApp} title="Start over"
-          className="w-9 h-9 rounded-lg flex items-center justify-center text-base cursor-pointer transition-all duration-200"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(245,243,238,0.5)" }}>↻</button>
+          className="w-8 h-8 rounded-lg flex items-center justify-center text-sm cursor-pointer"
+          style={{ background: "#f3f4f6", border: "none", color: "#6b7280" }}>↻</button>
       </header>
 
-      {/* Progress Section */}
-      <div className="px-6 pt-6 pb-2">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-bold tracking-tight" style={{ fontFamily: SERIF, color: "#1C1B18", letterSpacing: "-0.02em" }}>{progress}%</span>
-            <span className="text-[13px] font-medium" style={{ color: "#9B978E" }}>complete</span>
-          </div>
-          <span className="text-[13px] font-medium px-3 py-1 rounded-full" style={{ background: "#F0EDE6", color: "#6B6860" }}>
-            {doneTasks}/{totalTasks} tasks
+      {/* Progress */}
+      <div className="px-6 py-5 bg-white" style={{ borderBottom: "1px solid #f0f0ee" }}>
+        <div className="flex items-center justify-between mb-2.5">
+          <span className="text-sm font-medium" style={{ color: "#374151" }}>
+            {progress}% complete
+          </span>
+          <span className="text-xs font-medium" style={{ color: "#9ca3af" }}>
+            {doneTasks} of {totalTasks} tasks
           </span>
         </div>
-        <div className="h-2 rounded-full overflow-hidden" style={{ background: "#EDEAE3" }}>
-          <div className="h-full rounded-full transition-all duration-700 ease-out"
-            style={{ width: `${progress}%`, background: "linear-gradient(90deg, #D4A239 0%, #C49428 50%, #B8863A 100%)" }} />
+        <div className="h-2 rounded-full overflow-hidden" style={{ background: "#f3f4f6" }}>
+          <div className="h-full rounded-full transition-all duration-500"
+            style={{ width: `${progress}%`, background: "#6366f1" }} />
         </div>
       </div>
 
       {/* Content */}
       {!activeCategory ? (
-        <div className="grid gap-3.5 px-6 pt-4 pb-10" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))" }}>
-          {CATEGORIES.map((cat, idx) => {
+        <div className="grid gap-3 p-6" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", animation: "fadeUp 0.4s ease" }}>
+          {CATEGORIES.map(cat => {
             const ct = tasks[cat.id] || [];
             const done = ct.filter(t => t.done).length;
             const total = ct.length;
             const pct = total ? Math.round((done / total) * 100) : 0;
             return (
               <button key={cat.id}
-                className={`rounded-2xl p-5 text-left cursor-pointer transition-all duration-300 hover:-translate-y-0.5 flex flex-col gap-3 stagger-${idx + 1}`}
-                style={{
-                  background: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.06)",
-                  boxShadow: "var(--shadow-sm)",
-                  animation: "fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards",
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-md)"; (e.currentTarget as HTMLElement).style.borderColor = cat.color + "40"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "var(--shadow-sm)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,0,0,0.06)"; }}
+                className="bg-white rounded-xl p-4 text-left cursor-pointer transition-all duration-200 flex flex-col gap-3"
+                style={{ border: "1px solid #f0f0ee", boxShadow: "0 1px 2px rgba(0,0,0,0.03)" }}
                 onClick={() => { setActiveCategory(cat.id); setFilter("all"); setExpandedTask(null); }}>
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center text-xl"
-                  style={{ background: cat.bg, fontSize: "22px" }}>{cat.icon}</div>
-                <div>
-                  <div className="text-[14px] font-semibold tracking-tight" style={{ color: "#1C1B18", lineHeight: 1.3 }}>{cat.label}</div>
-                  <div className="text-[12px] font-medium mt-0.5" style={{ color: "#9B978E" }}>{done} of {total} done</div>
-                </div>
-                <div className="flex items-center gap-2.5 w-full mt-auto">
-                  <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "#F0EDE6" }}>
-                    <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: cat.color, opacity: 0.85 }} />
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
+                  style={{ background: cat.color + "12" }}>{cat.icon}</div>
+                <div className="text-sm font-semibold" style={{ color: "#111" }}>{cat.label}</div>
+                <div className="flex items-center gap-2 w-full mt-auto">
+                  <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: "#f3f4f6" }}>
+                    <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, background: cat.color }} />
                   </div>
-                  <span className="text-[11px] font-bold tabular-nums" style={{ color: cat.color }}>{pct}%</span>
+                  <span className="text-xs font-medium" style={{ color: "#9ca3af" }}>{done}/{total}</span>
                 </div>
               </button>
             );
           })}
         </div>
       ) : (
-        <div className="px-6 pt-4 pb-10" style={{ animation: "fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1)" }}>
-          <button className="inline-flex items-center gap-1.5 text-[13px] font-medium cursor-pointer py-2 bg-transparent border-none transition-colors duration-200"
-            style={{ color: "#9B978E" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#1C1B18")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#9B978E")}
-            onClick={() => { setActiveCategory(null); setExpandedTask(null); setAddingTask(false); }}>
-            <span>←</span> All Categories
-          </button>
+        <div className="p-6" style={{ animation: "fadeUp 0.3s ease" }}>
+          <button className="text-sm font-medium cursor-pointer py-1 mb-3 bg-transparent border-none"
+            style={{ color: "#6366f1" }}
+            onClick={() => { setActiveCategory(null); setExpandedTask(null); setAddingTask(false); }}>← All Categories</button>
 
-          <div className="flex items-center gap-3.5 mb-5 mt-1">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style={{ background: activeCat?.bg }}>{activeCat?.icon}</div>
+          <div className="flex items-center gap-3 mb-5">
+            <span className="text-3xl">{activeCat?.icon}</span>
             <div>
-              <h2 className="text-[26px] leading-tight" style={{ fontFamily: SERIF, color: "#1C1B18", fontWeight: 500, letterSpacing: "-0.01em" }}>{activeCat?.label}</h2>
-              <p className="text-[13px] font-medium mt-0.5" style={{ color: "#9B978E" }}>
-                {catTasks.filter(t => t.done).length} of {catTasks.length} completed
-              </p>
+              <h2 className="text-xl font-semibold" style={{ fontFamily: HEADING, color: "#111" }}>{activeCat?.label}</h2>
+              <p className="text-xs" style={{ color: "#9ca3af" }}>{catTasks.filter(t => t.done).length} of {catTasks.length} completed</p>
             </div>
           </div>
 
-          <div className="flex gap-2 mb-5 p-1 rounded-xl" style={{ background: "#F0EDE6" }}>
+          <div className="flex gap-1.5 mb-5 p-1 rounded-lg" style={{ background: "#f3f4f6" }}>
             {(["all", "pending", "done"] as const).map(f => (
-              <button key={f} className="flex-1 px-4 py-2 rounded-lg text-[13px] font-semibold cursor-pointer transition-all duration-200"
+              <button key={f} className="flex-1 px-3 py-1.5 rounded-md text-xs font-semibold cursor-pointer transition-all duration-150"
                 style={{
                   border: "none",
-                  background: filter === f ? "#FFFFFF" : "transparent",
-                  color: filter === f ? "#1C1B18" : "#9B978E",
-                  boxShadow: filter === f ? "0 1px 3px rgba(0,0,0,0.08)" : "none"
+                  background: filter === f ? "#fff" : "transparent",
+                  color: filter === f ? "#111" : "#9ca3af",
+                  boxShadow: filter === f ? "0 1px 2px rgba(0,0,0,0.06)" : "none"
                 }}
                 onClick={() => setFilter(f)}>
-                {f === "all" ? `All (${catTasks.length})` : f === "pending" ? `To Do (${catTasks.filter(t => !t.done).length})` : `Done (${catTasks.filter(t => t.done).length})`}
+                {f === "all" ? "All" : f === "pending" ? "To Do" : "Done"}
               </button>
             ))}
           </div>
 
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-2">
             {filteredTasks.map(t => (
-              <div key={t.id} className="rounded-xl px-4 py-3.5 transition-all duration-200"
-                style={{
-                  background: "#FFFFFF",
-                  border: "1px solid rgba(0,0,0,0.06)",
-                  borderLeft: `3px solid ${PRIORITIES[t.priority]?.color || "#999"}`,
-                  boxShadow: "var(--shadow-sm)"
-                }}>
-                <div className="flex items-center gap-3.5">
-                  <button className="w-[22px] h-[22px] rounded-lg flex items-center justify-center flex-shrink-0 cursor-pointer transition-all duration-200"
+              <div key={t.id} className="bg-white rounded-lg px-4 py-3 transition-all duration-150"
+                style={{ border: "1px solid #f0f0ee", borderLeft: `3px solid ${PRIORITIES[t.priority]?.color || "#ccc"}` }}>
+                <div className="flex items-center gap-3">
+                  <button className="w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 cursor-pointer"
                     style={{
-                      border: `2px solid ${t.done ? activeCat?.color : "#D0CBC2"}`,
-                      background: t.done ? activeCat?.color : "transparent",
-                      boxShadow: t.done ? `0 0 0 2px ${activeCat?.color}20` : "none"
+                      border: `2px solid ${t.done ? "#6366f1" : "#d1d5db"}`,
+                      background: t.done ? "#6366f1" : "transparent"
                     }}
                     onClick={() => toggleTask(activeCategory, t.id)}>
-                    {t.done && <span className="text-white text-[11px] font-bold leading-none">✓</span>}
+                    {t.done && <span className="text-white text-xs font-bold">✓</span>}
                   </button>
-                  <div className="flex-1 cursor-pointer min-w-0" onClick={() => setExpandedTask(expandedTask === t.id ? null : t.id)}>
-                    <span className="text-[14px] font-medium transition-all leading-snug"
-                      style={{ color: t.done ? "#9B978E" : "#1C1B18", textDecoration: t.done ? "line-through" : "none" }}>{t.title}</span>
-                    {t.day > 0 && <span className="text-[11px] font-semibold ml-2 px-2 py-0.5 rounded-md inline-block"
-                      style={{ background: "#F0EDE6", color: "#9B978E" }}>Day {t.day}</span>}
+                  <div className="flex-1 cursor-pointer" onClick={() => setExpandedTask(expandedTask === t.id ? null : t.id)}>
+                    <span className="text-sm font-medium"
+                      style={{ color: t.done ? "#9ca3af" : "#111", textDecoration: t.done ? "line-through" : "none" }}>{t.title}</span>
+                    {t.day > 0 && <span className="text-xs ml-2 px-1.5 py-0.5 rounded"
+                      style={{ background: "#f3f4f6", color: "#9ca3af" }}>Day {t.day}</span>}
                   </div>
-                  <span className="text-[11px] px-2.5 py-1 rounded-lg font-bold whitespace-nowrap uppercase tracking-wide"
-                    style={{ background: PRIORITIES[t.priority]?.bg, color: PRIORITIES[t.priority]?.color, letterSpacing: "0.04em" }}>
+                  <span className="text-[10px] px-2 py-1 rounded font-bold uppercase tracking-wider whitespace-nowrap"
+                    style={{ background: PRIORITIES[t.priority]?.bg, color: PRIORITIES[t.priority]?.color }}>
                     {PRIORITIES[t.priority]?.label}
                   </span>
-                  <button className="bg-transparent border-none text-lg cursor-pointer px-1 leading-none transition-colors duration-200"
-                    style={{ color: "#D0CBC2" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#D93025")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#D0CBC2")}
+                  <button className="bg-transparent border-none text-lg cursor-pointer px-1 leading-none"
+                    style={{ color: "#d1d5db" }}
                     onClick={() => deleteTask(activeCategory, t.id)}>×</button>
                 </div>
                 {expandedTask === t.id && t.tip && (
-                  <div className="flex gap-2.5 mt-3 p-3.5 rounded-xl"
-                    style={{ background: "#FAFAF7", border: "1px solid #F0EDE6", animation: "slideDown 0.25s ease" }}>
+                  <div className="flex gap-2 mt-2.5 p-3 rounded-lg"
+                    style={{ background: "#f9fafb", border: "1px solid #f3f4f6", animation: "slideDown 0.2s ease" }}>
                     <span className="text-sm flex-shrink-0">💡</span>
-                    <span className="text-[13px] leading-relaxed" style={{ color: "#6B6860" }}>{t.tip}</span>
+                    <span className="text-sm leading-relaxed" style={{ color: "#6b7280" }}>{t.tip}</span>
                   </div>
                 )}
               </div>
             ))}
             {filteredTasks.length === 0 && (
-              <div className="text-center py-12" style={{ animation: "fadeIn 0.4s ease" }}>
-                <div className="text-3xl mb-3">{filter === "done" ? "💪" : filter === "pending" ? "🎉" : "📋"}</div>
-                <p className="text-[14px] font-medium" style={{ color: "#9B978E" }}>
-                  {filter === "done" ? "Nothing completed yet — you got this!" : filter === "pending" ? "All done here!" : "No tasks in this category."}
-                </p>
-              </div>
+              <p className="text-center text-sm py-10" style={{ color: "#9ca3af" }}>
+                {filter === "done" ? "Nothing completed yet — you got this!" : filter === "pending" ? "All done here! 🎉" : "No tasks in this category."}
+              </p>
             )}
           </div>
 
           {addingTask ? (
-            <div className="flex gap-2 mt-4 items-center">
-              <input className="flex-1 px-4 py-3 rounded-xl text-[14px] transition-all duration-200"
-                style={{ border: "1px solid rgba(0,0,0,0.1)", background: "#FFFFFF", fontFamily: SANS, boxShadow: "var(--shadow-sm)" }}
-                placeholder="What do you need to do?" value={newTask}
+            <div className="flex gap-2 mt-3 items-center">
+              <input className="flex-1 px-3.5 py-2.5 rounded-lg text-sm"
+                style={{ border: "1.5px solid #e5e7eb", background: "#fff" }}
+                placeholder="Add a task..." value={newTask}
                 onChange={e => setNewTask(e.target.value)}
                 onKeyDown={e => e.key === "Enter" && addTaskItem(activeCategory)}
                 autoFocus />
-              <button className="px-5 py-3 rounded-xl text-[13px] font-semibold text-white cursor-pointer border-none transition-all duration-200"
-                style={{ background: activeCat?.color, boxShadow: `0 2px 8px ${activeCat?.color}30` }}
+              <button className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white cursor-pointer border-none"
+                style={{ background: "#6366f1" }}
                 onClick={() => addTaskItem(activeCategory)}>Add</button>
-              <button className="px-4 py-3 rounded-xl text-[13px] font-medium cursor-pointer transition-all duration-200"
-                style={{ border: "1px solid rgba(0,0,0,0.1)", background: "#FFFFFF", color: "#6B6860" }}
+              <button className="px-3.5 py-2.5 rounded-lg text-sm cursor-pointer bg-white"
+                style={{ border: "1.5px solid #e5e7eb", color: "#6b7280" }}
                 onClick={() => { setAddingTask(false); setNewTask(""); }}>Cancel</button>
             </div>
           ) : (
-            <button className="w-full py-3.5 rounded-xl text-[13px] font-semibold cursor-pointer mt-4 bg-transparent transition-all duration-200"
-              style={{ border: `2px dashed rgba(0,0,0,0.1)`, color: "#9B978E" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = activeCat?.color || "#999"; e.currentTarget.style.color = activeCat?.color || "#999"; e.currentTarget.style.background = activeCat?.bg || "#f5f5f5"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.1)"; e.currentTarget.style.color = "#9B978E"; e.currentTarget.style.background = "transparent"; }}
+            <button className="w-full py-3 rounded-lg text-sm font-medium cursor-pointer mt-3 bg-transparent"
+              style={{ border: "2px dashed #e5e7eb", color: "#9ca3af" }}
               onClick={() => setAddingTask(true)}>+ Add Task</button>
           )}
         </div>
